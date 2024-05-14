@@ -1,0 +1,64 @@
+
+
+cd "D:/Top Up/Development of Large Systems/DLS_Catalog_Service_2.0"
+cd "DLS_Catalog_Service_2.0/DLS_Catalog_Service_2.0"
+
+Ytting@DESKTOP-K2ADFN6 MINGW64 /d/Top Up/Development of Large Systems/DLS_Catalog_Service/DLS_Catalog_Service/DLS_Catalog_Service (Main_Branch)
+$ docker build -t dls_catalog_service .
+
+
+
+
+eller docker-compose up --build -d
+
+
+
+
+
+Applying Changes
+After adding or changes
+
+
+Save your docker-compose.yml.
+
+from here: Ytting@DESKTOP-K2ADFN6 MINGW64 /d/Top Up/Development of Large Systems/DLS_Catalog_Service/DLS_Catalog_Service/DLS_Catalog_Service (Main_Branch)
+
+Run docker-compose down to stop and remove the containers if they are running.
+Run docker-compose up --build to recreate the containers with the new settings.
+
+
+
+
+
+cd "D:/Top Up/Development of Large Systems/DLS_Catalog_Service_3.0"
+docker-compose down --rmi all // fjerner både containers og images
+docker system prune /slet alt
+docker-compose up --build -d // builder og starter
+
+
+
+
+name: UniTest
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore DLS_Catalog_Service_2.0.sln
+
+    - name: Build
+      run: dotnet build DLS_Catalog_Service_2.0.sln --configuration Release
+
+    - name: Test
+      run: dotnet test DLS_Catalog_Service_2.0.Tests/DLS_Catalog_Service_2.0.Tests.csproj --configuration Release --logger "trx;LogFileName=test_results.trx" --filter FullyQualifiedName~UnitTest_Model.CategoryTests
