@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>DLS_Catalog_Service_3._0</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>D:\Top Up\Development of Large Systems\DLS_Catalog_Service_3.0\DLS_Catalog_Service_3.0\bin\Debug\net7.0\DLS_Catalog_Service_3.0.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
