@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myrabbitmq-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myrabbitmq
+  template:
+    metadata:
+      labels:
+        app: myrabbitmq
+    spec:
+      containers:
+      - name: myrabbitmq
+        image: dockerytting/myrabbitmq:latest
+        ports:
+        - containerPort: 5672
+        - containerPort: 15672
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          value: "user"
+        - name: RABBITMQ_DEFAULT_PASS
+          value: "password"

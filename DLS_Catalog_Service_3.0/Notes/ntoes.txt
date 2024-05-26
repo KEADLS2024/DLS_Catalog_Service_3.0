@@ -6,3 +6,37 @@ docker-compose up --build -d // builder og starter
 
 
 
+
+
+
+
+
+
+
+Problem med entrypoint
+
+choco install dos2unix
+After Installing dos2unix
+Once dos2unix is installed, follow these steps to convert the line endings and set the correct permissions:
+
+Open your terminal or Git Bash.
+Navigate to the root of your project directory:
+bash
+Copy code
+cd path/to/your/project
+Convert the line endings for entrypoint.sh:
+bash
+Copy code
+dos2unix DLS_Catalog_Service_3.0/entrypoint.sh
+Make the entrypoint.sh script executable:
+bash
+Copy code
+chmod +x DLS_Catalog_Service_3.0/entrypoint.sh
+Verify the file permissions:
+bash
+Copy code
+ls -la DLS_Catalog_Service_3.0/entrypoint.sh
+Rebuild your Docker image:
+bash
+Copy code
+docker-compose up --build

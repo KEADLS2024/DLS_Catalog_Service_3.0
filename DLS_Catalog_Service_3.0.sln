@@ -17,6 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLS_Catalog_Service_3.0.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx_project", "docfx_project", "{1DD763AB-21DC-49ED-931B-AE0713B31421}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kubernetes", "kubernetes", "{40ACBBAF-C3D8-4D3E-816A-27A857036B5A}"
+	ProjectSection(SolutionItems) = preProject
+		kubernetes\mongodb-pvc.yaml = kubernetes\mongodb-pvc.yaml
+		kubernetes\myapi-deployment.yaml = kubernetes\myapi-deployment.yaml
+		kubernetes\myapi-service.yaml = kubernetes\myapi-service.yaml
+		kubernetes\mymongodb-deployment.yaml = kubernetes\mymongodb-deployment.yaml
+		kubernetes\mymongodb-service.yaml = kubernetes\mymongodb-service.yaml
+		kubernetes\myrabbitmq-deployment.yaml = kubernetes\myrabbitmq-deployment.yaml
+		kubernetes\myrabbitmq-service.yaml = kubernetes\myrabbitmq-service.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

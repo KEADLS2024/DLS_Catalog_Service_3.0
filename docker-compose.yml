@@ -3,8 +3,8 @@ version: '3.8'
 services:
   myapi:
     build:
-      context: ./DLS_Catalog_Service_3.0
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: DLS_Catalog_Service_3.0/Dockerfile
     ports:
       - "8080:80"
       - "8443:7026"
@@ -20,6 +20,7 @@ services:
       - RabbitMQSettings__HostName=myrabbitmq
       - RabbitMQSettings__UserName=user
       - RabbitMQSettings__Password=password
+      - MONGO_HOST=mymongodb
 
   mymongodb:
     build:

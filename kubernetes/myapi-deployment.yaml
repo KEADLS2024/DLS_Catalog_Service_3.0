@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapi-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapi
+  template:
+    metadata:
+      labels:
+        app: myapi
+    spec:
+      containers:
+      - name: myapi
+        image: dockerytting/myapi:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: AllowedHosts
+          value: "*"
+        - name: MongoDbSettings__ConnectionString
+          value: "mongodb://mymongodb:27017"
+        - name: MongoDbSettings__DatabaseName
+          value: "DLS"
+        - name: RabbitMQSettings__HostName
+          value: "myrabbitmq"
+        - name: RabbitMQSettings__UserName
+          value: "user"
+        - name: RabbitMQSettings__Password
+          value: "password"
+        - name: MONGO_HOST
+          value: "mymongodb"
+        - name: RABBITMQ_HOST
+          value: "myrabbitmq"
