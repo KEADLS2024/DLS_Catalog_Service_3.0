@@ -33,7 +33,7 @@ namespace DLS_Catalog_Service.Repositories
             return await _context.ProductDetails.Find(_ => true).ToListAsync();
         }
 
-        public async Task<ProductDetail> GetByIdAsync(string id)
+        public async Task<ProductDetail> GetByIdAsync(int id)
         {
             return await _context.ProductDetails.Find(detail => detail.Id == id).FirstOrDefaultAsync();
         }
@@ -45,7 +45,7 @@ namespace DLS_Catalog_Service.Repositories
             return detail;
         }
 
-        public async Task<bool> UpdateAsync(string id, ProductDetail detail)
+        public async Task<bool> UpdateAsync(int id, ProductDetail detail)
         {
             var updateResult = await _context.ProductDetails.ReplaceOneAsync(
                 g => g.Id == id,
@@ -58,7 +58,7 @@ namespace DLS_Catalog_Service.Repositories
             return false;
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var filter = Builders<ProductDetail>.Filter.Eq(m => m.Id, id);
             var deleteResult = await _context.ProductDetails.DeleteOneAsync(filter);

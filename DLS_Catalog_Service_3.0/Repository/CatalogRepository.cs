@@ -50,7 +50,7 @@ namespace DLS_Catalog_Service.Repositories
             return await _context.Catalog.Find(_ => true).ToListAsync();
         }
 
-        public async Task<Catalog> GetCatalogByIdAsync(string id)
+        public async Task<Catalog> GetCatalogByIdAsync(int id)
         {
             return await _context.Catalog.Find(catalog => catalog.Id == id).FirstOrDefaultAsync();
         }
@@ -62,7 +62,7 @@ namespace DLS_Catalog_Service.Repositories
             return catalog;
         }
 
-        public async Task<bool> UpdateCatalogAsync(string id, Catalog catalog)
+        public async Task<bool> UpdateCatalogAsync(int id, Catalog catalog)
         {
             ReplaceOneResult updateResult = await _context.Catalog.ReplaceOneAsync(
                 filter: g => g.Id == id,
@@ -75,7 +75,7 @@ namespace DLS_Catalog_Service.Repositories
             return false;
         }
 
-        public async Task<bool> DeleteCatalogAsync(string id)
+        public async Task<bool> DeleteCatalogAsync(int id)
         {
             DeleteResult deleteResult = await _context.Catalog.DeleteOneAsync(catalog => catalog.Id == id);
             if (deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0)

@@ -26,7 +26,12 @@ namespace DLS_Catalog_Service.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(string id)
         {
-            var product = await _productRepository.GetByIdAsync(id);
+            if (!int.TryParse(id, out int productId))
+            {
+                return BadRequest("Invalid product id format.");
+            }
+
+            var product = await _productRepository.GetByIdAsync(productId);
             if (product == null) return NotFound();
             return Ok(product);
         }
@@ -41,7 +46,6 @@ namespace DLS_Catalog_Service.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(string id, [FromBody] Product product)
         {
-            // Convert id to int if the Id property of Product is of type int
             if (!int.TryParse(id, out int productId))
             {
                 return BadRequest("Invalid product id format.");
@@ -52,7 +56,7 @@ namespace DLS_Catalog_Service.Controllers
                 return BadRequest("Product id mismatch.");
             }
 
-            var updated = await _productRepository.UpdateAsync(id, product);
+            var updated = await _productRepository.UpdateAsync(productId, product);
             if (!updated) return NotFound();
             return NoContent();
         }
@@ -60,7 +64,12 @@ namespace DLS_Catalog_Service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
-            var deleted = await _productRepository.DeleteAsync(id);
+            if (!int.TryParse(id, out int productId))
+            {
+                return BadRequest("Invalid product id format.");
+            }
+
+            var deleted = await _productRepository.DeleteAsync(productId);
             if (!deleted) return NotFound();
             return NoContent();
         }

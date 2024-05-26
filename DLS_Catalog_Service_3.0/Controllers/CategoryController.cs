@@ -15,6 +15,7 @@ namespace DLS_Catalog_Service.Controllers
         {
             _categoryRepository = categoryRepository;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
@@ -30,11 +31,15 @@ namespace DLS_Catalog_Service.Controllers
             }
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById(string id)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
+            if (!int.TryParse(id, out int categoryId))
+            {
+                return BadRequest("Invalid category id format.");
+            }
+
+            var category = await _categoryRepository.GetByIdAsync(categoryId);
             if (category == null) return NotFound();
             return Ok(category);
         }
@@ -49,7 +54,6 @@ namespace DLS_Catalog_Service.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(string id, [FromBody] Category category)
         {
-            // Convert id to int if the Id property of Category is of type int
             if (!int.TryParse(id, out int categoryId))
             {
                 return BadRequest("Invalid category id format.");
@@ -60,7 +64,7 @@ namespace DLS_Catalog_Service.Controllers
                 return BadRequest("Category id mismatch.");
             }
 
-            var updated = await _categoryRepository.UpdateAsync(id, category);
+            var updated = await _categoryRepository.UpdateAsync(categoryId, category);
             if (!updated) return NotFound();
             return NoContent();
         }
@@ -68,7 +72,12 @@ namespace DLS_Catalog_Service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(string id)
         {
-            var deleted = await _categoryRepository.DeleteAsync(id);
+            if (!int.TryParse(id, out int categoryId))
+            {
+                return BadRequest("Invalid category id format.");
+            }
+
+            var deleted = await _categoryRepository.DeleteAsync(categoryId);
             if (!deleted) return NotFound();
             return NoContent();
         }

@@ -26,7 +26,12 @@ namespace DLS_Catalog_Service.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCatalogById(string id)
         {
-            var catalog = await _catalogRepository.GetCatalogByIdAsync(id);
+            if (!int.TryParse(id, out int catalogId))
+            {
+                return BadRequest("Invalid catalog id format.");
+            }
+
+            var catalog = await _catalogRepository.GetCatalogByIdAsync(catalogId);
             if (catalog == null) return NotFound();
             return Ok(catalog);
         }
@@ -62,12 +67,17 @@ namespace DLS_Catalog_Service.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != catalog.Id)
+            if (!int.TryParse(id, out int catalogId))
+            {
+                return BadRequest("Invalid catalog id format.");
+            }
+
+            if (catalogId != catalog.Id)
             {
                 return BadRequest("ID mismatch between the URL and the body.");
             }
 
-            var updated = await _catalogRepository.UpdateCatalogAsync(id, catalog);
+            var updated = await _catalogRepository.UpdateCatalogAsync(catalogId, catalog);
             if (!updated)
             {
                 return NotFound($"Catalog with ID {id} not found.");
@@ -78,7 +88,12 @@ namespace DLS_Catalog_Service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCatalog(string id)
         {
-            var deleted = await _catalogRepository.DeleteCatalogAsync(id);
+            if (!int.TryParse(id, out int catalogId))
+            {
+                return BadRequest("Invalid catalog id format.");
+            }
+
+            var deleted = await _catalogRepository.DeleteCatalogAsync(catalogId);
             if (!deleted)
             {
                 return NotFound($"Catalog with ID {id} not found.");

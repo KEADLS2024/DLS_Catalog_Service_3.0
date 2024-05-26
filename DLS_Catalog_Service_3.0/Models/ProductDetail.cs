@@ -13,15 +13,15 @@ namespace DLS_Catalog_Service.Model
         /// Gets or sets the identifier of the product detail.
         /// </summary>
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [BsonRepresentation(BsonType.Int32)]
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier of the product to which the detail belongs.
         /// </summary>
         [BsonElement("productId")]
         [Required(ErrorMessage = "Product ID is required.")]
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the product.

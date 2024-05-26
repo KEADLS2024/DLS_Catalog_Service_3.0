@@ -5,10 +5,12 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLS_Catalog_Service_3.0", "DLS_Catalog_Service_3.0\DLS_Catalog_Service_3.0.csproj", "{4AAD17D4-7EB9-4FFC-9381-A9EF8C2C200C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{959AABDD-78B9-401F-85A2-5177676A2E7B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution_Items", "Solution_Items", "{959AABDD-78B9-401F-85A2-5177676A2E7B}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		Dockerfile.mongodb = Dockerfile.mongodb
 		rabbitmq.conf = rabbitmq.conf
+		seed.js = seed.js
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DLS_Catalog_Service_3.0.Tests", "DLS_Catalog_Service_3.0.Tests\DLS_Catalog_Service_3.0.Tests.csproj", "{A8A29243-61A2-441A-8CDC-89184E6D1920}"

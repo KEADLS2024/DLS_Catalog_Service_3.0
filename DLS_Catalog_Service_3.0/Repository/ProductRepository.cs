@@ -33,14 +33,9 @@ namespace DLS_Catalog_Service.Repositories
             return await _context.Products.Find(_ => true).ToListAsync();
         }
 
-        public async Task<Product> GetByIdAsync(string id)
+        public async Task<Product> GetByIdAsync(int id)
         {
-            if (!int.TryParse(id, out int productId))
-            {
-                return null;  // Optionally handle invalid id format
-            }
-
-            return await _context.Products.Find(product => product.Id == productId).FirstOrDefaultAsync();
+            return await _context.Products.Find(product => product.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<Product> CreateAsync(Product product)
@@ -50,14 +45,9 @@ namespace DLS_Catalog_Service.Repositories
             return product;
         }
 
-        public async Task<bool> UpdateAsync(string id, Product product)
+        public async Task<bool> UpdateAsync(int id, Product product)
         {
-            if (!int.TryParse(id, out int productId))
-            {
-                return false;
-            }
-
-            var filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, id);
             var updateResult = await _context.Products.ReplaceOneAsync(filter, product);
             if (updateResult.IsAcknowledged && updateResult.ModifiedCount > 0)
             {
@@ -67,18 +57,13 @@ namespace DLS_Catalog_Service.Repositories
             return false;
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            if (!int.TryParse(id, out int productId))
-            {
-                return false;
-            }
-
-            var filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, id);
             var deleteResult = await _context.Products.DeleteOneAsync(filter);
             if (deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0)
             {
-                PublishProductMessage(new Product { Id = productId }, "Deleted");
+                PublishProductMessage(new Product { Id = id }, "Deleted");
                 return true;
             }
             return false;

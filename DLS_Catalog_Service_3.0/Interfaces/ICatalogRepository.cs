@@ -7,9 +7,9 @@ namespace DLS_Catalog_Service.Repositories
     public interface ICatalogRepository
     {
         Task<IEnumerable<Catalog>> GetAllCatalogsAsync();
-        Task<Catalog> GetCatalogByIdAsync(string id);  
+        Task<Catalog> GetCatalogByIdAsync(int id);
         Task<Catalog> CreateCatalogAsync(Catalog catalog);
-        Task<bool> UpdateCatalogAsync(string id, Catalog catalog);
-        Task<bool> DeleteCatalogAsync(string id);
+        Task<bool> UpdateCatalogAsync(int id, Catalog catalog);
+        Task<bool> DeleteCatalogAsync(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DLS_Catalog_Service.Model;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Linq;
 
 public class MongoDbContext
 {
@@ -10,6 +11,25 @@ public class MongoDbContext
     {
         var client = new MongoClient(settings.Value.ConnectionString);
         _database = client.GetDatabase(settings.Value.DatabaseName);
+
+        // Ensure collections are created
+        var collectionNames = _database.ListCollectionNames().ToList();
+        if (!collectionNames.Contains("Catalog"))
+        {
+            _database.CreateCollection("Catalog");
+        }
+        if (!collectionNames.Contains("Category"))
+        {
+            _database.CreateCollection("Category");
+        }
+        if (!collectionNames.Contains("Product"))
+        {
+            _database.CreateCollection("Product");
+        }
+        if (!collectionNames.Contains("ProductDetail"))
+        {
+            _database.CreateCollection("ProductDetail");
+        }
     }
 
     public IMongoCollection<Catalog> Catalog => _database.GetCollection<Catalog>("Catalog");

@@ -13,8 +13,8 @@ namespace DLS_Catalog_Service.Model
         /// Gets or sets the identifier of the catalog.
         /// </summary>
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [BsonRepresentation(BsonType.Int32)]
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the catalog.
